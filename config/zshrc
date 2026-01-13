@@ -1,0 +1,67 @@
+autoload -Uz compinit
+compinit
+
+PROMPT="%F{green}%n%f@%F{magenta}%m%f %F{blue}%~%f %# "
+EDITOR=vim
+
+# Add a visual menu select
+zstyle ':completion:*' menu select
+# Add completion for cd ..
+zstyle ':completion:*' special-dirs true
+# Case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+setopt correct # Enable autocorrect
+
+bindkey "^[[1~" beginning-of-line # Home
+bindkey "^[[4~" end-of-line       # End
+bindkey "^[[1;5D" backward-word   # Ctrl-left
+bindkey "^[[1;5C" forward-word    # Ctrl-right
+
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+
+# Press Ctrl-v + <key> to get the code
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-forward-end
+
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_SPACE
+
+# Aliases
+alias ls='ls --color=auto -v --group-directories-first'
+alias ll='ls -lh'
+alias la='ls -A'
+alias lf='ls -lhA'
+
+# FZF
+. /usr/share/zsh/plugins/fzf/fzf.plugin.zsh
+export FZF_DEFAULT_OPTS="--reverse -1"
+export FZF_COMPLETION_TRIGGER=";;"
+export FZF_COMPLETION_OPTS="--tiebreak=end --preview 'cat {} | head -200'"
+export FZF_CTRL_T_OPTS="--tiebreak=end --preview 'cat {} | head -200'"
+export FZF_ALT_C_OPTS="--tiebreak=end --preview 'tree {} | head -200'"
+
+# Custom prompt with starship
+eval "$(starship init zsh)"
+
+# Use bat instead of cat
+export BAT_STYLE=plain
+export BAT_THEME=ansi
+alias cat='bat --'
+
+# Use eza instead of ls
+alias ls='eza --group-directories-first'
+alias ll='ls -l --time-style=long-iso -b'
+alias la='ls -a'
+alias lf='ll -a'
+
+# Direnv
+eval "$(direnv hook zsh)"
+
+# vim: set ft=zsh

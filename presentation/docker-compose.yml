@@ -1,0 +1,21 @@
+name: zsh-demo
+
+services:
+  slides:
+    image: cloudogu/reveal.js
+    environment:
+      TITLE: "ZSH for Dummies"
+      THEME_CSS: "zenburn.css"
+      MAX_SCALE: 1.4
+    volumes:
+      - "./slides:/reveal/docs/slides:ro"
+      - "./themes/dracula.css:/reveal/dist/theme/dracula.css:ro"
+      - "./themes/zenburn.css:/reveal/dist/theme/zenburn.css:ro"
+      - "./fonts/InputMonoNerdFontMono-Regular.ttf:/reveal/dist/theme/fonts/InputMonoNerdFontMono-Regular.ttf"
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8080"]
+      start_period: 1s
+      interval: 30s
+    stop_grace_period: 500ms

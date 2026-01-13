@@ -1,0 +1,12 @@
+# Replace the '❯' symbol in the prompt with '➜' and '✘'
+[character]
+success_symbol = '[➜](bold green)'
+error_symbol = '[✘](bold red)'
+
+# Disable the prompt showing we're in a container
+[container]
+disabled = true
+
+# Show that we use direnv
+[direnv]
+disabled = false
