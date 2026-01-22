@@ -51,9 +51,12 @@ export FZF_ALT_C_OPTS="--tiebreak=end --preview 'tree {} | head -200'"
 eval "$(starship init zsh)"
 
 # Use bat instead of cat
-export BAT_STYLE=plain
-export BAT_THEME=ansi
 alias cat='bat --'
+# bat configuration. To use a configuration file instead,
+# see https://github.com/sharkdp/bat?tab=readme-ov-file#configuration-file
+export BAT_STYLE=plain  # Output only the file's content, like `cat`
+export BAT_THEME=ansi   # Use the shell's default colors
+export BAT_PAGER=never  # Disable the pager
 
 # Use eza instead of ls
 alias ls='eza --group-directories-first'
