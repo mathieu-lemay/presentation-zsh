@@ -217,7 +217,29 @@ bindkey "^[[1;5C" forward-word    # Ctrl-right
 
 ## History
 
-* zsh keeps a history of commands
+zsh keeps a history of commands
+
+* Persistent
+* Configurable
+* Searchable
+
+---
+
+## Sensible History Defaults
+
+```sh
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+
+setopt HIST_IGNORE_ALL_DUPS # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks before recording entry.
+```
+
+---
+
+## Nagivating history
+
 * You can use ↑ and ↓ for basic navigation
 * But...
 
@@ -291,29 +313,6 @@ $ echo "I don't want a" !$
 ```
 
 Obligatory <a href="https://xkcd.com/149/">xkcd</a>
-
----
-
-## Command History Matters
-
-zsh history:
-
-* Persistent
-* Configurable
-* Can be shared across terminals
-
----
-
-## Sensible History Defaults
-
-```sh
-HISTSIZE=10000
-SAVEHIST=10000
-HISTFILE=~/.zsh_history
-
-setopt HIST_IGNORE_ALL_DUPS # Delete old recorded entry if new entry is a duplicate.
-setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks before recording entry.
-```
 
 ---
 
